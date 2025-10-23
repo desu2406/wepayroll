@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PAYROLL DISPLAY</title>
+    <style>
+        body {
+            background-color: violet;
+            font-family: Arial;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="output"></div>
+
+    <script>
+        let data = JSON.parse(localStorage.getItem("payrollData"));
+        if (data) {
+            document.getElementById("output").innerHTML = `
+                <h2>PAYROLL SUMMARY</h2>
+                <p><b>ID Number:</b> ${data.idnum}</p>
+                <p><b>Name:</b> ${data.fname} ${data.mname} ${data.lname}</p>
+                <p><b>Position:</b> ${data.position}</p>
+                <p><b>Rate:</b> ₱${data.rate.toFixed(2)}</p>
+                <p><b>Work Days:</b> ${data.days}</p>
+                <p><b>Gross Pay:</b> ₱${data.gross.toFixed(2)}</p>
+                <p><b>SSS (5%):</b> ₱${data.sss.toFixed(2)}</p>
+                <p><b>Pag-ibig (3%):</b> ₱${data.pagibig.toFixed(2)}</p>
+                <p><b>PhilHealth (2%):</b> ₱${data.philhealth.toFixed(2)}</p>
+                <p><b>Tax (5%):</b> ₱${data.tax.toFixed(2)}</p>
+                <p><b>Total Deduction:</b> ₱${data.totalDeduction.toFixed(2)}</p>
+                <p><b>Net Pay:</b> ₱${data.net.toFixed(2)}</p>
+                <hr>
+                <a href="main.html">Back</a>
+            `;
+        }
+    </script>
+</body>
+</html>

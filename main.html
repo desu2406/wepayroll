@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PAYROLL INPUT</title>
+    <style>
+        body {
+            background-color: violet;
+            font-family: Arial;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .submitbutton {
+            height: 40px;
+            width: 100px;
+            background-color: violet;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>ID NUMBER <input type="text" id="idnum"></h3>
+        <h3>LAST NAME <input type="text" id="lname"></h3>
+        <h3>FIRST NAME <input type="text" id="fname"></h3>
+        <h3>MIDDLE NAME <input type="text" id="mname"></h3>
+        <h3>POSITION <input type="text" id="position"></h3>
+        <h3>RATE <input type="number" id="rate"></h3>
+        <h3>WORK DAYS <input type="number" id="days"></h3>
+        <input type="button" value="Submit" class="submitbutton" onclick="computePayroll()">
+    </div>
+
+    <script>
+        function computePayroll() {
+            let idnum = document.getElementById("idnum").value;
+            let lname = document.getElementById("lname").value;
+            let fname = document.getElementById("fname").value;
+            let mname = document.getElementById("mname").value;
+            let position = document.getElementById("position").value;
+            let rate = parseFloat(document.getElementById("rate").value);
+            let days = parseFloat(document.getElementById("days").value);
+
+            let gross = rate * days;
+            let sss = gross * 0.05;
+            let pagibig = gross * 0.03;
+            let philhealth = gross * 0.02;
+            let tax = gross * 0.05;
+            let totalDeduction = sss + pagibig + philhealth + tax;
+            let net = gross - totalDeduction;
+
+            let payrollData = {
+                idnum, lname, fname, mname, position,
+                rate, days, gross, sss, pagibig, philhealth, tax, totalDeduction, net
+            };
+
+            localStorage.setItem("payrollData", JSON.stringify(payrollData));
+            window.location.href = "display.html";
+        }
+    </script>
+</body>
+</html>
